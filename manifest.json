@@ -1,0 +1,21 @@
+{
+  "name": "FF Demo Menu",
+  "short_name": "FF Demo",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#08080d",
+  "theme_color": "#ff176f",
+  "description": "Free Fire style UI demonstration app. UI only.",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
