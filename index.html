@@ -1,70 +1,52 @@
-<!doctype html>
-<html lang="vi">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ff176f">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="FF Demo">
-<link rel="manifest" href="manifest.json">
-<title>FF Demo Menu</title>
+<!doctype html><html lang="vi"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#090a10"><link rel="manifest" href="manifest.json"><title>FF Mini FPS</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif;background:#08080d;color:#fff}
-body{overflow:hidden}.bg{height:100%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 45%,#26101c 0,#0c0b11 38%,#050508 100%)}
-.hint{position:absolute;bottom:20px;color:#666;font-size:11px;text-align:center}
-#menu{position:fixed;top:70px;right:16px;width:290px;background:#0c0c12f7;border:1px solid #ff176f;border-radius:15px;overflow:hidden;box-shadow:0 0 10px #ff176f,0 0 30px #ff176f59;z-index:10;user-select:none}
-.header{padding:14px;background:linear-gradient(135deg,#ff176f,#841448);display:flex;justify-content:space-between;align-items:center}
-.title{font-weight:bold;letter-spacing:1px;font-size:15px}.version{display:block;margin-top:3px;font-size:9px;opacity:.75}
-.close{border:0;background:transparent;color:#fff;font-size:22px}.tabs{display:flex;background:#17171d}.tab{flex:1;padding:11px 4px;text-align:center;color:#999;font-size:11px}.tab.active{color:#ff4f91;border-bottom:2px solid #ff176f}
-.page{display:none;padding:12px}.page.active{display:block}.item{display:flex;justify-content:space-between;align-items:center;padding:12px 5px;border-bottom:1px solid #27272e}
-.name{font-size:13px}.desc{margin-top:3px;color:#777;font-size:9px}.switch{width:42px;height:22px;position:relative}.switch input{display:none}
-.slider{position:absolute;inset:0;background:#35353d;border-radius:20px}.slider:before{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;background:#aaa;border-radius:50%;transition:.2s}
-input:checked+.slider{background:#ff176f;box-shadow:0 0 8px #ff176fb3}input:checked+.slider:before{transform:translateX(20px);background:white}
-input[type=range]{width:105px;accent-color:#ff176f}.value{color:#ff4f91;font-size:11px;width:28px;display:inline-block;text-align:right}
-.status{margin-top:10px;padding:9px;text-align:center;border-radius:8px;background:#18181e;color:#777;font-size:9px}.status.on{color:#ff4f91}
-.footer{padding:9px;text-align:center;font-size:8px;color:#555;background:#101015}
-#crosshair{display:none;position:fixed;left:50%;top:50%;width:26px;height:26px;transform:translate(-50%,-50%);z-index:5}
-#crosshair:before,#crosshair:after{content:"";position:absolute;background:#ff176f;box-shadow:0 0 6px #ff176f}
-#crosshair:before{left:12px;top:0;width:2px;height:26px}#crosshair:after{left:0;top:12px;width:26px;height:2px}
-#fps{display:none;position:fixed;left:12px;top:12px;color:#ff4f91;font:11px monospace;background:#101015cc;padding:5px 7px;border:1px solid #ff176f;border-radius:6px}
-</style>
-</head>
-<body>
-<div class="bg"><div class="hint">FREE FIRE STYLE UI DEMO — UI only</div></div>
-<div id="crosshair"></div><div id="fps">FPS: --</div>
-<div id="menu">
-<div class="header"><div><div class="title">FF DEMO MENU</div><span class="version">PWA • UI DEMONSTRATION</span></div><button class="close" id="close">×</button></div>
-<div class="tabs"><div class="tab active" data-page="visual">VISUAL</div><div class="tab" data-page="aim">AIM</div><div class="tab" data-page="misc">MISC</div></div>
-<div class="page active" id="page-visual">
-<div class="item"><div><div class="name">ESP</div><div class="desc">Demo toggle only</div></div><label class="switch"><input id="esp" type="checkbox"><span class="slider"></span></label></div>
-<div class="item"><div><div class="name">Player Box</div><div class="desc">UI preview</div></div><label class="switch"><input id="box" type="checkbox"><span class="slider"></span></label></div>
-<div class="item"><div><div class="name">Skeleton</div><div class="desc">UI preview</div></div><label class="switch"><input id="skeleton" type="checkbox"><span class="slider"></span></label></div>
-</div>
-<div class="page" id="page-aim">
-<div class="item"><div><div class="name">Aim Head</div><div class="desc">Demo toggle only</div></div><label class="switch"><input id="aim" type="checkbox"><span class="slider"></span></label></div>
-<div class="item"><div><div class="name">FOV</div><div class="desc">Visual setting</div></div><div><input id="fov" type="range" min="10" max="180" value="90"><span class="value" id="fovValue">90</span></div></div>
-<div class="item"><div><div class="name">Crosshair</div><div class="desc">Demo UI element</div></div><label class="switch"><input id="crosshairToggle" type="checkbox"><span class="slider"></span></label></div>
-</div>
-<div class="page" id="page-misc">
-<div class="item"><div><div class="name">FPS Counter</div><div class="desc">Demo display</div></div><label class="switch"><input id="fpsToggle" type="checkbox"><span class="slider"></span></label></div>
-<div class="item"><div><div class="name">Performance</div><div class="desc">UI setting</div></div><label class="switch"><input id="performance" type="checkbox"><span class="slider"></span></label></div>
-</div>
-<div class="status" id="status">DEMO MODE • ALL FEATURES OFF</div><div class="footer">UI ONLY • NO GAME MODIFICATION</div>
-</div>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08090e;color:#fff;font-family:Arial,sans-serif;touch-action:none}
+canvas{display:block;width:100%;height:100%}#hud{position:fixed;inset:0;pointer-events:none}
+#cross{position:absolute;left:50%;top:50%;width:28px;height:28px;transform:translate(-50%,-50%)}#cross:before,#cross:after{content:"";position:absolute;background:#fff}#cross:before{left:13px;top:0;width:2px;height:28px}#cross:after{left:0;top:13px;width:28px;height:2px}
+#stats{position:absolute;left:12px;top:10px;font-size:12px;line-height:1.5;text-shadow:0 1px 3px #000}#score{position:absolute;right:12px;top:10px;text-align:right;text-shadow:0 1px 3px #000}
+#menuBtn{position:absolute;right:10px;bottom:16px;pointer-events:auto;border:1px solid #ff2b75;background:#17111a;color:#fff;border-radius:12px;padding:11px 14px;font-weight:700}
+#menu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(360px,90vw);max-height:86vh;overflow:auto;background:rgba(12,13,20,.96);border:1px solid #ff2b75;border-radius:18px;padding:16px;box-shadow:0 0 35px rgba(255,43,117,.2);pointer-events:auto}.hidden{display:none!important}
+h1{font-size:18px;margin:0 0 4px}.sub{font-size:11px;opacity:.65;margin-bottom:14px}.tabs{display:flex;gap:6px;margin-bottom:10px}.tab{flex:1;padding:9px;text-align:center;border-radius:9px;background:#191b24;font-size:12px}.tab.active{background:#ff2b75}.page{display:none}.page.active{display:block}
+.item{display:flex;align-items:center;justify-content:space-between;padding:11px 4px;border-bottom:1px solid #252732;font-size:13px}.switch{width:43px;height:24px;border-radius:20px;background:#343642;position:relative}.switch i{position:absolute;width:18px;height:18px;top:3px;left:3px;border-radius:50%;background:#fff;transition:.15s}.switch.on{background:#ff2b75}.switch.on i{left:22px}
+input[type=range]{width:125px}.start{width:100%;margin-top:13px;padding:12px;border:0;border-radius:11px;background:#ff2b75;color:#fff;font-weight:800}
+#stick{position:absolute;left:18px;bottom:25px;width:120px;height:120px;border:1px solid #ffffff40;border-radius:50%;background:#ffffff0d;pointer-events:auto}#knob{position:absolute;left:35px;top:35px;width:50px;height:50px;border-radius:50%;background:#ff2b7588}
+#fire{position:absolute;right:25px;bottom:45px;width:82px;height:82px;border-radius:50%;border:2px solid #ffffff66;background:#ff2b7540;color:#fff;font-weight:800;pointer-events:auto}
+#look{position:absolute;right:0;top:0;width:55%;height:70%;pointer-events:auto}#toast{position:absolute;left:50%;top:15%;transform:translateX(-50%);background:#000b;padding:8px 12px;border-radius:10px;font-size:12px;opacity:0;transition:.2s}
+</style></head><body>
+<canvas id="game"></canvas><div id="hud"><div id="stats">FPS: <b id="fps">--</b><br>HP: <b id="hp">100</b></div><div id="score">TARGETS: <b id="targets">0</b><br>SCORE: <b id="points">0</b></div><div id="cross"></div><div id="toast"></div><button id="menuBtn">MENU</button></div>
+<div id="stick"><div id="knob"></div></div><div id="look"></div><button id="fire">FIRE</button>
+<div id="menu"><h1>FF MINI FPS</h1><div class="sub">TRAINING ARENA • OFFLINE DEMO</div><div class="tabs"><div class="tab active" data-page="visual">VISUAL</div><div class="tab" data-page="aim">AIM</div><div class="tab" data-page="misc">MISC</div></div>
+<div class="page active" id="visual"><div class="item">ESP <span class="switch on" data-k="esp"><i></i></span></div><div class="item">Player Box <span class="switch on" data-k="box"><i></i></span></div><div class="item">Skeleton <span class="switch" data-k="skeleton"><i></i></span></div><div class="item">Distance <span class="switch on" data-k="distance"><i></i></span></div></div>
+<div class="page" id="aim"><div class="item">Aim Assist <span class="switch" data-k="aim"><i></i></span></div><div class="item">Aim FOV <input id="fov" type="range" min="10" max="120" value="55"><b id="fovv">55°</b></div><div class="item">Crosshair <span class="switch on" data-k="cross"><i></i></span></div></div>
+<div class="page" id="misc"><div class="item">FPS Counter <span class="switch on" data-k="fps"><i></i></span></div><div class="item">Performance Mode <span class="switch on" data-k="perf"><i></i></span></div></div>
+<button class="start" id="start">START / RESTART</button></div>
 <script>
-const ids=['esp','box','skeleton','aim','crosshairToggle','fpsToggle','performance','fov'];
-const names={esp:'ESP',box:'BOX',skeleton:'SKELETON',aim:'AIM HEAD',crosshairToggle:'CROSSHAIR',fpsToggle:'FPS',performance:'PERFORMANCE'};
-ids.forEach(id=>{const e=document.getElementById(id);const v=localStorage.getItem('ff_'+id);if(e&&v!==null)e.type==='checkbox'?e.checked=v==='1':e.value=v});
-function save(){ids.forEach(id=>{const e=document.getElementById(id);if(e)localStorage.setItem('ff_'+id,e.type==='checkbox'?(e.checked?'1':'0'):e.value)})}
-function update(){const a=Object.keys(names).filter(id=>document.getElementById(id)?.checked).map(id=>names[id]);status.textContent=a.length?'DEMO • '+a.join(' • '):'DEMO MODE • ALL FEATURES OFF';status.classList.toggle('on',a.length>0);save()}
-const status=document.getElementById('status');
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('page-'+t.dataset.page).classList.add('active')});
-document.querySelectorAll('input[type=checkbox]').forEach(e=>e.onchange=()=>{document.getElementById('crosshair').style.display=document.getElementById('crosshairToggle').checked?'block':'none';document.getElementById('fps').style.display=document.getElementById('fpsToggle').checked?'block':'none';update()});
-const fov=document.getElementById('fov');fov.oninput=()=>{document.getElementById('fovValue').textContent=fov.value;save()};
-document.getElementById('close').onclick=()=>document.getElementById('menu').style.display='none';
-let frames=0,last=performance.now();function loop(n){frames++;if(n-last>=1000){document.getElementById('fps').textContent='FPS: '+frames;frames=0;last=n}requestAnimationFrame(loop)}requestAnimationFrame(loop);
-document.getElementById('crosshair').style.display=document.getElementById('crosshairToggle').checked?'block':'none';document.getElementById('fps').style.display=document.getElementById('fpsToggle').checked?'block':'none';update();
-</script>
-</body>
-</html>
+const c=document.getElementById('game'),ctx=c.getContext('2d');let W,H,DPR=1,last=0,frames=0,ft=0,running=false;
+const state={esp:true,box:true,skeleton:false,distance:true,aim:false,cross:true,fps:true,perf:true,fov:55};const p={x:7.5,y:11,a:-Math.PI/2,hp:100,score:0};
+const map=["111111111111111","100000000000001","101111011111101","100001000010001","101101011010101","100000000000001","101011111110101","100010000010001","101010111010101","100000100000001","101111101111101","100000000000001","111111111111111"],MW=15,MH=13;let bots=[];
+function resize(){DPR=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*DPR;c.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}addEventListener('resize',resize);resize();
+function wall(x,y){return x<0||y<0||x>=MW||y>=MH||map[y][x]==='1'}function solid(x,y){return wall(Math.floor(x),Math.floor(y))}
+function toast(t){let e=document.getElementById('toast');e.textContent=t;e.style.opacity=1;clearTimeout(window.tt);window.tt=setTimeout(()=>e.style.opacity=0,700)}
+function spawn(){let s=[[2.5,1.8],[5.5,1.7],[9.5,1.8],[12.3,3.5],[2.2,5.5],[6.2,5.3],[10.7,5.5],[12,8.3],[4.2,9.5],[8,9.3],[11,11]];bots=s.map((q,i)=>({x:q[0],y:q[1],alive:true,phase:i}));p.x=7.5;p.y=11;p.a=-Math.PI/2;p.hp=100;p.score=0;running=true;toast('TRAINING START')}
+function move(dx,dy){let nx=p.x+dx,ny=p.y+dy;if(!solid(nx,p.y))p.x=nx;if(!solid(p.x,ny))p.y=ny}
+function ray(a,max=30){for(let d=0;d<max;d+=.035){let x=p.x+Math.cos(a)*d,y=p.y+Math.sin(a)*d;if(solid(x,y))return d}return max}
+function info(b){let dx=b.x-p.x,dy=b.y-p.y,d=Math.hypot(dx,dy),da=Math.atan2(dy,dx)-p.a;da=Math.atan2(Math.sin(da),Math.cos(da));return{d,da}}
+function best(){let z=null;for(let b of bots)if(b.alive){let q=info(b);if(Math.abs(q.da)<=state.fov*Math.PI/360&&q.d<20&&ray(p.a+q.da,20)>q.d-.2&&(!z||q.d<z.d))z={b,...q}}return z}
+function shoot(){if(!running)return;let q=state.aim?best():null,a=q?p.a+q.da:p.a,hit=null,bd=999;for(let b of bots)if(b.alive){let q=info(b),da=Math.atan2(Math.sin(q.da+(p.a-a)),Math.cos(q.da+(p.a-a)));if(Math.abs(da)<.055&&q.d<20&&q.d<bd&&ray(a,20)>q.d-.25){hit=b;bd=q.d}}if(hit){hit.alive=false;p.score+=100;toast('HIT +100')}else toast('MISS')}
+function draw(){ctx.clearRect(0,0,W,H);ctx.fillStyle='#121624';ctx.fillRect(0,0,W,H/2);ctx.fillStyle='#191b1c';ctx.fillRect(0,H/2,W,H/2);
+const FOV=Math.PI/3,rays=Math.max(100,Math.floor(W/(state.perf?3:2))),rw=W/rays;for(let i=0;i<rays;i++){let a=p.a-FOV/2+FOV*i/rays,d=ray(a),cd=d*Math.cos(a-p.a),h=Math.min(H*2,H/(cd*.22)),y=(H-h)/2,sh=Math.max(25,150-d*6);ctx.fillStyle=`rgb(${sh},${sh},${sh+8})`;ctx.fillRect(i*rw,y,rw+1,h)}
+for(let b of bots)if(b.alive){let q=info(b);if(Math.abs(q.da)>FOV/2+.2||ray(p.a+q.da)>q.d)continue;let sx=W/2+Math.tan(q.da)/Math.tan(FOV/2)*W/2,bh=Math.min(H*.9,H/(q.d*.42)),bw=bh*.42,by=H/2-bh*.48;ctx.fillStyle='#ff315f';ctx.fillRect(sx-bw/2,by,bw,bh);ctx.fillStyle='#ffd0b5';ctx.beginPath();ctx.arc(sx,by+bh*.16,bh*.13,0,7);ctx.fill();if(state.esp){if(state.box){ctx.strokeStyle='#00ffb7';ctx.lineWidth=2;ctx.strokeRect(sx-bw/2-3,by-3,bw+6,bh+6)}if(state.distance){ctx.fillStyle='#fff';ctx.font='11px Arial';ctx.textAlign='center';ctx.fillText(q.d.toFixed(1)+'m',sx,by-8)}if(state.skeleton){ctx.strokeStyle='#fff';ctx.beginPath();ctx.moveTo(sx,by+bh*.28);ctx.lineTo(sx,by+bh*.62);ctx.lineTo(sx-bw*.25,by+bh*.88);ctx.moveTo(sx,by+bh*.62);ctx.lineTo(sx+bw*.25,by+bh*.88);ctx.stroke()}}}
+document.getElementById('targets').textContent=bots.filter(b=>b.alive).length;document.getElementById('points').textContent=p.score;document.getElementById('hp').textContent=Math.max(0,p.hp)}
+let keys={};addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true;if(e.key===' ')shoot()});addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
+let stick={x:0,y:0},sid=null,st=document.getElementById('stick'),kn=document.getElementById('knob');st.addEventListener('touchstart',e=>{sid=e.changedTouches[0].identifier;stickMove(e.changedTouches[0])},{passive:false});st.addEventListener('touchmove',e=>{for(let t of e.changedTouches)if(t.identifier===sid)stickMove(t)},{passive:false});st.addEventListener('touchend',()=>{stick.x=stick.y=0;kn.style.left='35px';kn.style.top='35px'},{passive:false});
+function stickMove(t){let r=st.getBoundingClientRect(),x=(t.clientX-(r.left+60))/45,y=(t.clientY-(r.top+60))/45,m=Math.hypot(x,y);if(m>1){x/=m;y/=m}stick.x=x;stick.y=y;kn.style.left=35+x*30+'px';kn.style.top=35+y*30+'px'}
+let lookOn=false,lx=0,look=document.getElementById('look');look.addEventListener('touchstart',e=>{lookOn=true;lx=e.changedTouches[0].clientX},{passive:false});look.addEventListener('touchmove',e=>{if(lookOn){let t=e.changedTouches[0];p.a+=(t.clientX-lx)*.008;lx=t.clientX}},{passive:false});look.addEventListener('touchend',()=>lookOn=false);
+document.getElementById('fire').onclick=shoot;document.getElementById('fire').ontouchstart=e=>{e.preventDefault();shoot()};
+function loop(t){let dt=Math.min(.05,(t-last)/1000||0);last=t;if(running){let sx=stick.x,sy=stick.y;if(keys.w)sy-=1;if(keys.s)sy+=1;if(keys.a)p.a-=2.3*dt;if(keys.d)p.a+=2.3*dt;let sp=2.8*dt;move(Math.cos(p.a)*(-sy)*sp+Math.cos(p.a+Math.PI/2)*sx*sp,Math.sin(p.a)*(-sy)*sp+Math.sin(p.a+Math.PI/2)*sx*sp)}draw();frames++;ft+=dt;if(ft>1){document.getElementById('fps').textContent=frames;frames=0;ft=0}requestAnimationFrame(loop)}requestAnimationFrame(loop);
+document.querySelectorAll('.tab').forEach(x=>x.onclick=()=>{document.querySelectorAll('.tab').forEach(y=>y.classList.remove('active'));document.querySelectorAll('.page').forEach(y=>y.classList.remove('active'));x.classList.add('active');document.getElementById(x.dataset.page).classList.add('active')});
+document.querySelectorAll('.switch').forEach(x=>x.onclick=()=>{let k=x.dataset.k;state[k]=!state[k];x.classList.toggle('on',state[k]);if(k==='cross')document.getElementById('cross').style.display=state.cross?'block':'none';if(k==='fps')document.getElementById('stats').style.display=state.fps?'block':'none'});
+document.getElementById('fov').oninput=e=>{state.fov=+e.target.value;document.getElementById('fovv').textContent=state.fov+'°'};document.getElementById('menuBtn').onclick=()=>document.getElementById('menu').classList.toggle('hidden');document.getElementById('start').onclick=()=>{spawn();document.getElementById('menu').classList.add('hidden')};spawn();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
+</script></body></html>

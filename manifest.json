@@ -1,11 +1,11 @@
 {
-  "name": "FF Demo Menu",
-  "short_name": "FF Demo",
-  "start_url": "./index.html",
+  "name": "FF Mini FPS Training Arena",
+  "short_name": "FF Mini FPS",
+  "start_url": ".",
   "display": "standalone",
-  "background_color": "#08080d",
-  "theme_color": "#ff176f",
-  "description": "Free Fire style UI demonstration app. UI only.",
+  "background_color": "#08090e",
+  "theme_color": "#090a10",
+  "orientation": "landscape",
   "icons": [
     {
       "src": "icon-192.png",
